@@ -1,12 +1,13 @@
-# -*- coding: gbk -*- #
+# -*- coding: utf-8 -*- #
 # by oldj http://oldj.net/ #
 
 import pythoncom
 import pyHook
+import time
 
 
 def onMouseEvent(event):
-    # ¼àÌıÊó±êÊÂ¼ş
+    # ç›‘å¬é¼ æ ‡äº‹ä»¶
     print "MessageName:", event.MessageName
     print "Message:", event.Message
     print "Time:", event.Time
@@ -17,20 +18,21 @@ def onMouseEvent(event):
     print "Injected:", event.Injected
     print"---"
 
-    # ·µ»Ø True ÒÔ±ã½«ÊÂ¼ş´«¸øÆäËü´¦Àí³ÌĞò
-    # ×¢Òâ£¬Õâ¶ùÈç¹û·µ»Ø False £¬ÔòÊó±êÊÂ¼ş½«±»È«²¿À¹½Ø
-    # Ò²¾ÍÊÇËµÄãµÄÊó±ê¿´ÆğÀ´»á½©ÔÚÄÇ¶ù£¬ËÆºõÊ§È¥ÏìÓ¦ÁË
+    # è¿”å› True ä»¥ä¾¿å°†äº‹ä»¶ä¼ ç»™å…¶å®ƒå¤„ç†ç¨‹åº
+    # æ³¨æ„ï¼Œè¿™å„¿å¦‚æœè¿”å› False ï¼Œåˆ™é¼ æ ‡äº‹ä»¶å°†è¢«å…¨éƒ¨æ‹¦æˆª
+    # ä¹Ÿå°±æ˜¯è¯´ä½ çš„é¼ æ ‡çœ‹èµ·æ¥ä¼šåƒµåœ¨é‚£å„¿ï¼Œä¼¼ä¹å¤±å»å“åº”äº†
     return True
 
 
 def onKeyboardEvent(event):
-    # ¼àÌı¼üÅÌÊÂ¼ş
+    # ç›‘å¬é”®ç›˜äº‹ä»¶
     #print "MessageName:", event.MessageName
     #print "Message:", event.Message
     #print "Time:", event.Time
     #print "Window:", event.Window
     print "WindowName:", event.WindowName
     #print "Ascii:", event.Ascii, chr(event.Ascii)
+    print("æŒ‰é”®æ—¶é—´:%s\n" % time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime()))
     print "Key:", event.Key
     #print "KeyID:", event.KeyID
     #print "ScanCode:", event.ScanCode
@@ -39,22 +41,22 @@ def onKeyboardEvent(event):
     #print "Alt", event.Alt
     #print "Transition", event.Transition
     print "---"
-    # Í¬Êó±êÊÂ¼ş¼àÌıº¯ÊıµÄ·µ»ØÖµ
+    # åŒé¼ æ ‡äº‹ä»¶ç›‘å¬å‡½æ•°çš„è¿”å›å€¼
     return True
 
 
 def main():
-    # ´´½¨Ò»¸ö¡°¹³×Ó¡±¹ÜÀí¶ÔÏó
+    # åˆ›å»ºä¸€ä¸ªâ€œé’©å­â€ç®¡ç†å¯¹è±¡
     hm = pyHook.HookManager()
-    # ¼àÌıËùÓĞ¼üÅÌÊÂ¼ş
+    # ç›‘å¬æ‰€æœ‰é”®ç›˜äº‹ä»¶
     hm.KeyDown = onKeyboardEvent
-    # ÉèÖÃ¼üÅÌ¡°¹³×Ó¡±
+    # è®¾ç½®é”®ç›˜â€œé’©å­â€
     hm.HookKeyboard()
-    # ¼àÌıËùÓĞÊó±êÊÂ¼ş
+    # ç›‘å¬æ‰€æœ‰é¼ æ ‡äº‹ä»¶
     #hm.MouseAll = onMouseEvent
-    # ÉèÖÃÊó±ê¡°¹³×Ó¡±
+    # è®¾ç½®é¼ æ ‡â€œé’©å­â€
     #hm.HookMouse()
-    # ½øÈëÑ­»·£¬Èç²»ÊÖ¶¯¹Ø±Õ£¬³ÌĞò½«Ò»Ö±´¦ÓÚ¼àÌı×´Ì¬
+    # è¿›å…¥å¾ªç¯ï¼Œå¦‚ä¸æ‰‹åŠ¨å…³é—­ï¼Œç¨‹åºå°†ä¸€ç›´å¤„äºç›‘å¬çŠ¶æ€
     pythoncom.PumpMessages()
 
 
